@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Layer Editor - PersonalAR Admin</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; margin: 0; }
+    body { font-family: system-ui, sans-serif; background: #0d0f12; color: #e8e8ea; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+    header { display: flex; align-items: center; gap: 1rem; padding: 0.6rem 1rem; background: #16191e; border-bottom: 1px solid #262b33; flex-wrap: wrap; }
+    header h1 { font-size: 1rem; }
+    header a { color: #4a90d9; text-decoration: none; }
+    header .spacer { flex: 1; }
+    button, select, input { font: inherit; color: inherit; }
+    .btn { padding: 0.45rem 0.8rem; border-radius: 8px; border: 1px solid #262b33; background: #1c2027; cursor: pointer; }
+    .btn.primary { background: #4a90d9; border-color: #4a90d9; color: #fff; font-weight: 600; }
+    .btn.active { border-color: #4a90d9; color: #4a90d9; }
+    #layout { flex: 1; display: grid; grid-template-columns: 240px 1fr 280px; min-height: 0; }
+    aside { background: #121519; border-right: 1px solid #262b33; overflow-y: auto; padding: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    aside.right { border-right: 0; border-left: 1px solid #262b33; }
+    aside h2 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: #9aa0a8; }
+    #viewport { position: relative; min-width: 0; }
+    #viewport canvas { display: block; }
+    .layer-row { display: flex; align-items: center; gap: 0.5rem; padding: 0.45rem 0.6rem; border-radius: 8px; border: 1px solid transparent; cursor: pointer; }
+    .layer-row:hover { background: #1c2027; }
+    .layer-row.selected { border-color: #4a90d9; background: #1a2230; }
+    .layer-row .type { font-size: 0.7rem; color: #9aa0a8; text-transform: uppercase; }
+    .layer-row .name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .layer-row button { background: none; border: 0; color: #9aa0a8; cursor: pointer; padding: 0 0.2rem; }
+    .layer-row button:hover { color: #e8e8ea; }
+    fieldset { border: 1px solid #262b33; border-radius: 8px; padding: 0.6rem; display: grid; gap: 0.4rem; }
+    legend { font-size: 0.75rem; color: #9aa0a8; padding: 0 0.3rem; }
+    .vec { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.3rem; }
+    label.f { display: grid; gap: 0.2rem; font-size: 0.75rem; color: #9aa0a8; }
+    input[type="number"], input[type="text"], select { width: 100%; padding: 0.3rem 0.4rem; background: #0d0f12; border: 1px solid #262b33; border-radius: 6px; }
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem; }
+    #status { font-size: 0.8rem; color: #9aa0a8; }
+    #status.dirty { color: #e8b820; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><a href="/admin/">← PersonalAR</a> / Editor</h1>
+    <span id="artwork-title"></span>
+    <span class="spacer"></span>
+    <button class="btn" id="mode-t" title="Move (G)">Move</button>
+    <button class="btn" id="mode-r" title="Rotate (R)">Rotate</button>
+    <button class="btn" id="mode-s" title="Scale (S)">Scale</button>
+    <button class="btn" id="play">▶ Preview</button>
+    <span id="status">saved</span>
+    <button class="btn primary" id="save">Save (⌘S)</button>
+  </header>
+  <div id="layout">
+    <aside>
+      <h2>Layers</h2>
+      <div id="layer-list"></div>
+      <button class="btn" id="add-layer">+ Add layer…</button>
+      <input type="file" id="asset-file" hidden accept=".mp4,.webm,.png,.jpg,.jpeg,.webp,.gif,.glb,.gltf,.mp3,.m4a,.ogg,.wav" />
+      <p style="font-size:0.75rem; color:#9aa0a8;">Video · image · 3D model (glb/gltf) · audio. Drag gizmo in viewport or edit numbers on the right.</p>
+    </aside>
+    <div id="viewport"></div>
+    <aside class="right" id="inspector"><h2>Inspector</h2><p style="color:#9aa0a8; font-size:0.85rem;">Select a layer.</p></aside>
+  </div>
+  <script type="module" src="/src/editor/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "name": "personalar",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Self-hosted WebAR overlay platform - trigger-image tracked AR layers in the browser, no apps, no view caps.",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite --host",
+    "placeholder": "node scripts/generate-placeholder.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "vite preview --host",
+    "compile": "node scripts/compile-cli.mjs"
+  },
+  "dependencies": {
+    "mind-ar": "1.2.5",
+    "three": "0.160.1"
+  },
+  "overrides": {
+    "canvas": "^3.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-basic-ssl": "^2.1.0",
+    "qrcode": "^1.5.4",
+    "sharp": "^0.33.5",
+    "vite": "^6.3.5"
+  }
+}

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PersonalAR - Augmented Artworks</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; margin: 0; }
+    body { font-family: system-ui, sans-serif; background: #0d0f12; color: #e8e8ea; min-height: 100vh; padding: 2rem 1.25rem; }
+    main { max-width: 720px; margin: 0 auto; }
+    h1 { font-size: 1.6rem; letter-spacing: 0.02em; }
+    p.lead { color: #9aa0a8; margin: 0.5rem 0 2rem; }
+    ul { list-style: none; padding: 0; display: grid; gap: 0.75rem; }
+    a.card { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; background: #16191e; border: 1px solid #262b33; border-radius: 12px; color: inherit; text-decoration: none; }
+    a.card:hover { border-color: #4a90d9; }
+    a.card img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; background: #0d0f12; }
+    a.card .t { font-weight: 600; }
+    a.card .s { color: #9aa0a8; font-size: 0.85rem; }
+    #empty { color: #9aa0a8; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>PersonalAR</h1>
+    <p class="lead">Point your phone camera at one of the artworks below to see it come alive - right in the browser, no app needed.</p>
+    <ul id="list"></ul>
+    <p id="empty" hidden>No artworks published yet.</p>
+  </main>
+  <script type="module">
+    const base = import.meta.env.BASE_URL;
+    const list = document.getElementById('list');
+    try {
+      const artworks = await (await fetch(`${base}artworks-index.json`)).json();
+      if (!artworks.length) document.getElementById('empty').hidden = false;
+      for (const a of artworks) {
+        const li = document.createElement('li');
+        const img = a.trigger ? `<img src="${base}artworks/${a.slug}/${a.trigger}" alt="" />` : '';
+        li.innerHTML = `<a class="card" href="${base}ar/${a.slug}/">${img}<span><span class="t">${a.title}</span><br /><span class="s">Open AR viewer →</span></span></a>`;
+        list.appendChild(li);
+      }
+    } catch {
+      document.getElementById('empty').hidden = false;
+    }
+  </script>
+</body>
+</html>

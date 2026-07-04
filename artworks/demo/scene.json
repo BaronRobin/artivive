@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "slug": "demo",
+  "title": "Demo Artwork",
+  "trigger": {
+    "image": "trigger.png",
+    "mind": "targets.mind",
+    "width": 1200,
+    "height": 1600
+  },
+  "layers": [
+    {
+      "id": "l_video1",
+      "type": "video",
+      "name": "Overlay video",
+      "src": "assets/overlay.mp4",
+      "transform": {
+        "position": [
+          0,
+          0,
+          0.01
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "opacity": 1,
+      "loop": true,
+      "muted": true,
+      "timing": {
+        "delay": 0,
+        "fadeIn": 0.4,
+        "fadeOut": 0.2,
+        "duration": null,
+        "onLost": "pause"
+      }
+    }
+  ]
+}

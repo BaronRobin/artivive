@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Trigger Compiler - PersonalAR Admin</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; margin: 0; }
+    body { font-family: system-ui, sans-serif; background: #0d0f12; color: #e8e8ea; min-height: 100vh; padding: 2rem 1.25rem; }
+    main { max-width: 860px; margin: 0 auto; display: grid; gap: 1.25rem; }
+    h1 { font-size: 1.4rem; }
+    a { color: #4a90d9; }
+    .row { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; }
+    select, button { font: inherit; padding: 0.55rem 0.9rem; border-radius: 8px; border: 1px solid #262b33; background: #16191e; color: inherit; }
+    button.primary { background: #4a90d9; border-color: #4a90d9; color: #fff; font-weight: 600; cursor: pointer; }
+    button:disabled { opacity: 0.5; cursor: default; }
+    #drop { border: 2px dashed #33404f; border-radius: 12px; padding: 3rem 1rem; text-align: center; color: #9aa0a8; cursor: pointer; }
+    #drop.armed { border-color: #4a90d9; color: #e8e8ea; }
+    #progress { height: 8px; background: #16191e; border-radius: 999px; overflow: hidden; display: none; }
+    #progress > div { height: 100%; width: 0%; background: #4a90d9; transition: width 0.2s; }
+    #status { color: #9aa0a8; min-height: 1.2em; }
+    #preview { max-width: 100%; border-radius: 12px; display: none; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Trigger image compiler</h1>
+    <p><a href="/admin/">← back to gallery</a></p>
+    <div class="row">
+      <label for="slug">Artwork:</label>
+      <select id="slug"></select>
+      <button id="new">+ New artwork</button>
+    </div>
+    <div id="drop">Drop the trigger image here, or click to choose a file.<br /><small>Use a detailed, high-contrast image - flat or repetitive images track poorly.</small></div>
+    <input type="file" id="file" accept="image/png,image/jpeg,image/webp" hidden />
+    <div id="progress"><div></div></div>
+    <p id="status"></p>
+    <canvas id="preview"></canvas>
+  </main>
+  <script type="module" src="/src/admin/compiler.js"></script>
+</body>
+</html>
